@@ -26,6 +26,7 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  identifyAsBLK: Sequelize.BOOLEAN,
 });
 
 module.exports = User;

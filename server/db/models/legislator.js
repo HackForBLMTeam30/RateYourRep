@@ -15,4 +15,6 @@ const Legislator = db.define('legislator', {
   channels: Sequelize.ARRAY(Sequelize.JSON),
 });
 
+
 module.exports = Legislator;
+

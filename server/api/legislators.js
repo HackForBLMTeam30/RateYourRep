@@ -3,12 +3,17 @@ const axios = require('axios');
 const apiKey = require('../../config/key').key;
 
 router.get('/', async(req, res, next) => {
+
+
     const inputAddress = req.query.address;
     try {
         const { data } = await axios.get(
             `https://www.googleapis.com/civicinfo/v2/representatives?key=${apiKey}&address=${inputAddress}`
         );
+        console.log(data)
+
         res.json(data);
+
     } catch (error) {
         next(error);
     }
