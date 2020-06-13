@@ -7,7 +7,7 @@ const Legislator = db.define('legislator', {
     allowNull: false,
   },
   role: Sequelize.STRING,
-  address: Sequelize.ARRAY(Sequelize.STRING),
+  address: Sequelize.STRING,
   party: Sequelize.STRING,
   phones: Sequelize.ARRAY(Sequelize.STRING),
   urls: Sequelize.ARRAY(Sequelize.STRING),
