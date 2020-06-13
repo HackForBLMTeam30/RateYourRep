@@ -5,14 +5,7 @@ const legislators = [
   {
     name: 'Mike Pence',
     role: 'Vice President of the United States',
-    address: [
-      {
-        line1: '1600 Pennsylvania Avenue Northwest',
-        city: 'Washington',
-        state: 'DC',
-        zip: '20500',
-      },
-    ],
+    address:'1600 Pennsylvania Avenue Northwest Washington DC 20500',
     party: 'Republican Party',
     phones: ['(202) 456-1111'],
     urls: ['https://www.whitehouse.gov/'],
@@ -32,14 +25,7 @@ const legislators = [
   {
     name: 'Kirsten E. Gillibrand',
     role: 'U.S. Senator',
-    address: [
-      {
-        line1: '478 Russell Senate Office Building',
-        city: 'Washington',
-        state: 'DC',
-        zip: '20510',
-      },
-    ],
+    address:'478 Russell Senate Office Building Washington DC 20510',
     party: 'Democratic Party',
     phones: ['(202) 224-4451'],
     urls: ['https://www.gillibrand.senate.gov/'],
@@ -62,14 +48,7 @@ const legislators = [
   {
     name: 'Charles E. Schumer',
     role: 'U.S. Senator',
-    address: [
-      {
-        line1: '322 Hart Senate Office Building',
-        city: 'Washington',
-        state: 'DC',
-        zip: '20510',
-      },
-    ],
+    address:'322 Hart Senate Office Building Washington DC 20510',
     party: 'Democratic Party',
     phones: ['(202) 224-6542'],
     urls: ['https://www.schumer.senate.gov/'],
@@ -96,16 +75,7 @@ const legislators = [
   {
     name: 'Kathleen C. Hochul',
     role: 'Lieutenant Governor of New York',
-    address: [
-      {
-        line1: 'Lieutenant Governor of New York State',
-        line2: 'NYS State Capitol Building',
-        line3: '',
-        city: 'Albany',
-        state: 'NY',
-        zip: '12224',
-      },
-    ],
+    address: 'Lieutenant Governor of New York State Albany NY 12224',
     party: 'Democratic Party',
     phones: ['(518) 474-8390'],
     urls: ['http://kathyhochul.com/'],
@@ -123,35 +93,7 @@ const legislators = [
         id: 'UCNgh6Me2UyKXOuNDCnsCzPg',
       },
     ],
-  },
-  {
-    name: 'Aravella Simotas',
-    role: 'NY State Assemblymember',
-    address: [
-      {
-        line1: 'Legislative Office Building',
-        line2: '198 State Street',
-        city: 'Albany',
-        state: 'NY',
-        zip: '12248',
-      },
-    ],
-    party: 'Democratic Party',
-    phones: ['(518) 455-5014'],
-    urls: ['https://nyassembly.gov/mem/Aravella-Simotas'],
-    photoUrl: 'http://nyassembly.gov//mem/pic/036.jpg',
-    emails: ['simotasa@nyassembly.gov'],
-    channels: [
-      {
-        type: 'Facebook',
-        id: 'SimotasNY',
-      },
-      {
-        type: 'Twitter',
-        id: 'AravellaSimotas',
-      },
-    ],
-  },
+  }
 ];
 
 const users = [
@@ -208,7 +150,7 @@ async function seed() {
   );
 
   console.log(`seeded ${users.length} users`);
-  console.log(`seeded ${legislators.length} bouquets`);
+  console.log(`seeded ${legislators.length} legislators`);
   console.log(`seeded successfully`);
 }
 
