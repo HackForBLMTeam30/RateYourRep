@@ -3,7 +3,7 @@ module.exports = router;
 
 // Put your route paths here
 router.use('/users', require('./users'));
-router.use('/legislators', require('. / legislators '));
+router.use('/legislators', require('./legislators'));
 
 router.use((req, res, next) => {
     const error = new Error('Not Found');
