@@ -8,7 +8,6 @@ import {auth} from '../store'
  */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
-  console.log("Form type name: ", name)
 
   return (
     <div>
@@ -80,7 +79,7 @@ const AuthForm = props => {
             <label htmlFor="password">
               <small>Password</small>
             </label>
-            <input name="password" type="password" />
+            <input name="password" type="password" autoComplete="on" />
           </div>
           <div>
             <button type="submit">{displayName}</button>
@@ -130,7 +129,7 @@ const mapDispatch = dispatch => {
         city = evt.target.city.value
         state = evt.target.state.value
         zip = evt.target.zip.value
-        identity = evt.target.identity.value
+        identity = evt.target.identity.checked
       }
       dispatch(auth(email, password, formName, first_name, last_name, street1, street2, city, state, zip, identity))
     }
