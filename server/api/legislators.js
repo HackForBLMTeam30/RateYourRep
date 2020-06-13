@@ -4,7 +4,6 @@ const apiKey = require('../../config/key').key;
 
 router.get('/', async(req, res, next) => {
 
-
     const inputAddress = req.query.address;
     try {
         const { data } = await axios.get(
@@ -18,9 +17,7 @@ router.get('/', async(req, res, next) => {
                 legislator.address = `${line1} ${city} ${state} ${zip}`
             }
         })
-
-
-
+        console.log(data.officials)
         res.json(data);
 
     } catch (error) {
