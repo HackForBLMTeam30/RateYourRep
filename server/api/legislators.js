@@ -10,6 +10,7 @@ router.get('/', async(req, res, next) => {
         const { data } = await axios.get(
             `https://www.googleapis.com/civicinfo/v2/representatives?key=${apiKey}&address=${inputAddress}`
         );
+        console.log(data)
 
         res.json(data);
 
