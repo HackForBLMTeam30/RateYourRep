@@ -17,8 +17,15 @@ router.get('/', async(req, res, next) => {
                 legislator.address = `${line1} ${city} ${state} ${zip}`
             }
         })
-        console.log(data.officials)
+        data.offices.map((office) => {
+            const {name, officialIndices} = office
+            officialIndices.forEach((office) =>{
+                console.log({...data.officials[office],role: name})
+            })
+        })
+    
         res.json(data);
+
 
     } catch (error) {
         next(error);
