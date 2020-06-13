@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const db = require('./db');
 
 const app = express();
 
@@ -12,6 +13,10 @@ app.get('*', (req, res) => {
 });
 
 const port = process.env.PORT || 5000;
+
+const syncDb = db.sync({ force: true });
+syncDb();
+
 app.listen(port);
 
 console.log('Rating Reps on port: ' + port);

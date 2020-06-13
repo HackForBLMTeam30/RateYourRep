@@ -22,6 +22,7 @@ const User = db.define('user', {
   },
   zipCode: {
     type: Sequelize.INTEGER,
+    allowNull: false,
   },
 });
 
