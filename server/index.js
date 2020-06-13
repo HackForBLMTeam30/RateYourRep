@@ -14,9 +14,8 @@ app.get('*', (req, res) => {
 
 const port = process.env.PORT || 5000;
 
-const syncDb = db.sync({ force: true });
-syncDb();
-
-app.listen(port);
-
-console.log('Rating Reps on port: ' + port);
+db.sync().then(function () {
+  app.listen(port, function () {
+    console.log('Rating Reps on port: ' + port);
+  });
+});

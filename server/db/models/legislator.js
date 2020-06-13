@@ -1,17 +1,17 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const Legislator = db.Define('legislator', {
+const Legislator = db.define('legislator', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  address: Sequelize.ENUM(Object),
+  address: Sequelize.ARRAY(Sequelize.STRING),
   party: Sequelize.STRING,
-  phones: Sequelize.ENUM(String),
-  urls: Sequelize.ENUM(String),
+  phones: Sequelize.ARRAY(Sequelize.STRING),
+  urls: Sequelize.ARRAY(Sequelize.STRING),
   photoUrl: Sequelize.STRING,
-  channels: Sequelize.ENUM(Object),
+  channels: Sequelize.ARRAY(Sequelize.JSON),
 });
 
 module.exports = Legislator;
