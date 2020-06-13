@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const axios = require('axios');
 const apiKey = require('../../config/key').key;
+const {Legislator} = require('../db/models')
 
 router.get('/', async(req, res, next) => {
 
@@ -17,15 +18,24 @@ router.get('/', async(req, res, next) => {
                 legislator.address = `${line1} ${city} ${state} ${zip}`
             }
         })
+        let officialsArray =  []
         data.offices.map((office) => {
             const {name, officialIndices} = office
             officialIndices.forEach((office) =>{
-                console.log({...data.officials[office],role: name})
+                let official = data.officials[office]
+                let officialObject = {...official, role: name}
+               officialsArray.push(officialObject)
             })
         })
-    
-        res.json(data);
+        officialsArray.forEach(async(official) => {
+            console.log(official.address)
+            const person = await Legislator.findOne({where: {name: official.name} })
+            if(!person){
+                Legislator.create(official)
+            }
+        })
 
+        res.json(officialsArray);
 
     } catch (error) {
         next(error);
