@@ -13,7 +13,9 @@ export class Legislators extends Component{
     return(
       <>
       {this.props.legislators.map((legislator) => {
-        return <h1>{legislator.name}</h1>
+        return (<><h1>{legislator.name}</h1>
+        <h1>{legislator.address}</h1></>
+        )
       })}
 
       </>
