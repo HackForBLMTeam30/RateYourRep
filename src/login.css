@@ -74,6 +74,7 @@ button {
   display: flex;
   justify-content: space-between;
   box-shadow: 5px 3px lightgrey;
+  margin-bottom: 10px;
 }
 .nav-logo {
   color: #5fc4e3;
@@ -82,6 +83,7 @@ button {
 .links-div {
   display: flex;
   justify-content: space-around;
+  margin-top: 20px;
 }
 .nav-box {
   border: 2px solid #5fc4e3;
@@ -100,4 +102,16 @@ button {
   font-weight: normal;
   font-size: 14px;
   line-height: 19px;
+}
+.nav-links-div {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  margin-right: 10px;
+}
+.nav-text {
+  font-size: 20px;
+  text-decoration: none;
+  color: #5fc4e3;
+  margin-top: 20px;
 }

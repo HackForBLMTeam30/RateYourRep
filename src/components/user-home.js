@@ -11,22 +11,25 @@ export const UserHome = (props) => {
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
       <div className="links-div">
         <div className="nav-box">
           <h4>Your Ratings</h4>
+          <p className="nav-text">Welcome, {email}</p>
           <button>
             <Link className="link-fix" to="/ratings">
-              Get All Legislators
+              Get All Ratings
             </Link>
           </button>
         </div>
 
         <div className="nav-box">
           <h4>Legislators</h4>
+          <p className="nav-text">
+            Track your legislators and see their ratings
+          </p>
           <button>
             <Link className="link-fix" to="/legislators">
-              Get All Legislators
+              Get Your Legislators
             </Link>
           </button>
         </div>
