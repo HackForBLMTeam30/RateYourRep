@@ -1,5 +1,5 @@
 const db = require('.');
-const { Legislator, User } = require('./models');
+const { Legislator, User, Rating } = require('./models');
 
 const legislators = [
   {
@@ -103,6 +103,7 @@ const users = [
     email: 'scox0@t-online.de',
     password: 'Female',
     address: '62168 Burning Wood Street',
+    identifyAsBLK: true
   },
   {
     first_name: 'Jan',
@@ -110,6 +111,7 @@ const users = [
     email: 'jnares1@businesswire.com',
     password: 'Male',
     address: '29 Hanson Crossing',
+    identifyAsBLK: true
   },
   {
     first_name: 'Karlan',
@@ -134,6 +136,14 @@ const users = [
   },
 ];
 
+const ratings = [
+  {userId: 1, legislatorId: 1, transparency: 1, publicEngagement: 0, alignWithValues: 1, description: "I can't stand them, they completely disregard the public need and have done so for years."},
+  {userId: 2, legislatorId: 1, transparency: 1, publicEngagement: 0, alignWithValues: 1, description: "This tyranny needs to stop, what have they done to help the lower class?"},
+  {userId: 3, legislatorId: 1, transparency: 2, publicEngagement: 1, alignWithValues: 4, description: "I don't like that they do not always publicly announce their plans, but they get the job done."},
+  {userId: 4, legislatorId: 1, transparency: 2, publicEngagement: 2, alignWithValues: 4, description: "They are someone I can get behind."},
+  {userId: 5, legislatorId: 1, transparency: 3, publicEngagement: 5, alignWithValues: 4, description: "They came by the community center and spoke with kids about the dangers of drugs and alcohol abuse. They have good intentions."},
+]
+
 async function seed() {
   await db.sync({ force: true });
   console.log('db synced!');
@@ -149,8 +159,15 @@ async function seed() {
     })
   );
 
+  await Promise.all(
+    ratings.map((rating) => {
+      return Rating.create(rating);
+    })
+  );
+
   console.log(`seeded ${users.length} users`);
   console.log(`seeded ${legislators.length} legislators`);
+  console.log(`seeded ${ratings.length} ratings`);
   console.log(`seeded successfully`);
 }
 

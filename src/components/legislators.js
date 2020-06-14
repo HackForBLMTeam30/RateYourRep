@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getAllLegislators } from '../store/legislator';
-import { me } from '../store/user';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getAllLegislators } from "../store/legislator";
+import { me } from "../store/user";
 import {
   Paper,
   Table,
@@ -12,18 +12,21 @@ import {
   TableRow,
   Avatar,
   Container,
-} from '@material-ui/core';
-import Rating from '@material-ui/lab/Rating';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+} from "@material-ui/core";
+import Rating from "@material-ui/lab/Rating";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import history from "../history";
+import { NavLink } from "react-router-dom";
 
 export class Legislators extends Component {
   async componentDidMount() {
     await this.props.me();
     const { user } = this.props;
     const address = user.address;
-    this.props.getAllLegislators(address);
+    await this.props.getAllLegislators(address);
   }
   render() {
+    const { legislators } = this.props;
     return (
       <Container>
         <TableContainer component={Paper}>
@@ -38,7 +41,14 @@ export class Legislators extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.props.legislators.map((legislator, key) => {
+              {legislators.map((legislator, key) => {
+                let overallRating, overallBlkRating;
+                if (legislator.AverageRating) {
+                  overallRating = legislator.overallRating;
+                }
+                if (legislator.AverageBLKRating) {
+                  overallBlkRating = legislator.overallBlkRating;
+                }
                 return (
                   <TableRow key={key}>
                     <TableCell>
@@ -47,11 +57,17 @@ export class Legislators extends Component {
                     </TableCell>
                     <TableCell>{legislator.role}</TableCell>
                     <TableCell>
-                      <Rating name="simple-controlled" value={3} readOnly />
+                      <Rating
+                        name="simple-controlled"
+                        value={overallRating}
+                        readOnly
+                      />
                     </TableCell>
                     <TableCell>{legislator.party}</TableCell>
                     <TableCell align="center">
-                      <ChevronRightIcon fontSize="large" />
+                      <NavLink to={{pathname: `/legislator-landing/${legislator.id}`, state: {overallRating, overallBlkRating}}}>
+                        <ChevronRightIcon fontSize="large" />
+                      </NavLink>
                     </TableCell>
                   </TableRow>
                 );
