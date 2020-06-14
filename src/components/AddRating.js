@@ -45,6 +45,7 @@ class AddRating extends Component {
 
   onSubmit(e) {
     e.preventDefault();
+    const { id } = this.props.match.params;
     const { user, legislatorId } = this.props;
     const userId = user.id;
     const newRating = {
@@ -53,7 +54,7 @@ class AddRating extends Component {
       alignWithValues: this.state.alignWithValues,
       description: this.state.description,
       user: { id: userId },
-      legislatorId: legislatorId || 1,
+      legislatorId: id,
     };
     this.props.getAllRatings(newRating, this.props.history);
     this.props.history.push('./');

@@ -25,12 +25,12 @@ class LegislatorRatings extends React.Component {
   }
 
   render() {
-    const { legislatorRatings } = this.props;
+    const { legislatorRatings, activeLegislator } = this.props;
     return (
       <div id="ratings-container">
         <h3>Reviews</h3>
         <button className="primary-btn">
-          <Link to="/add-rating">ADD REVIEW</Link>
+          <Link to={`/add-rating/${activeLegislator.id}`}>ADD REVIEW</Link>
         </button>
         <div id="legislator-ratings">
           {legislatorRatings &&
