@@ -63,7 +63,7 @@ const AuthForm = props => {
               </div>
               <div>
                 <label htmlFor="identity">
-                  <small>Do you identify as Black?</small>
+                  <small>Do you identify as Black or African American?</small>
                 </label>
                 <input name="identity" type="checkbox" />
               </div>
