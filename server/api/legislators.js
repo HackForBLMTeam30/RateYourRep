@@ -10,7 +10,7 @@ router.get('/', async (req, res, next) => {
       `https://www.googleapis.com/civicinfo/v2/representatives?key=${apiKey}&address=${inputAddress}`
     );
     //parses address into one string
-    data.officials.map((legislator) => {
+    data.officials.forEach((legislator) => {
       if (legislator.address) {
         let address = legislator.address[0];
         const { line1, city, state, zip } = address;
@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
       }
     });
     let officialsArray = [];
-    data.offices.map((office) => {
+    data.offices.forEach((office) => {
       const { name, officialIndices } = office;
       officialIndices.forEach((office) => {
         let official = data.officials[office];

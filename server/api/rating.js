@@ -1,54 +1,93 @@
 const router = require('express').Router();
-const Rating = require('../db/models/rating');
+const { Rating } = require('../db/models');
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('postgres://localhost:5432/rateyourrep');
 
-// class AvgRating {
-//     constructor(total, count) {
+class AvgRating {
+  constructor(total, count) {
+    this.totalAllCategory = total;
+    this.transparencyTotal = 0;
+    this.publicEngagementTotal = 0;
+    this.alignWithValuesTotal = 0;
+    this.count = count;
+  }
+  addRating(category, value) {
+    if (category === 'transparency') {
+      this.transparencyTotal += value;
+    } else if (category === 'publicEngagement') {
+      this.publicEngagementTotal += value;
+    } else if (category === 'alignWithValues') {
+      this.alignWithValuesTotal += value;
+    }
+    this.count++;
+    this.totalAllCategory += value;
+  }
+  updateRating(category, prevRating, newRating) {
+    if (category === 'transparency') {
+      this.transparencyTotal -= prevRating;
+      this.transparencyTotal += newRating;
+    } else if (category === 'publicEngagement') {
+      this.publicEngagementTotal -= newRating;
+      this.publicEngagementTotal += newRating;
+    } else if (category === 'alignWithValues') {
+      this.alignWithValuesTotal -= prevRating;
+      this.alignWithValuesTotal += newRating;
+    }
+    this.total -= prevRating;
+    this.total += newRating;
+  }
+  getRating(category) {
+    if (category === 'transparency') {
+      return this.transparencyTotal / this.count;
+    } else if (category === 'publicEngagement') {
+      return this.publicEngagementTotal / this.count;
+    } else if (category === 'alignWithValues') {
+      return this.alignWithValuesTotal / this.count;
+    } else if (category === 'all') {
+      return this.totalAllCategory / this.count;
+    }
+  }
+}
 
-//         this.total = total;
-//         this.count = count;
-//     }
-//     addRating(value) {
-//         this.count++;
-//         this.total += value
-//     }
-//     updateRating(prevRating, newRating) {
-//         this.total -= prevRating
-//         this.total += newR
-//     }
-//     getRating() {
-//         return this.total / this.count
-//     }
+class LegislatorRating {
+  constructor() {
+    this.totalRatings = new AvgRating();
+    this.blackRatings = new AvgRating();
+  }
+}
 
+const legislators = {};
+
+router.post('/:legislatorId', async (req, res, next) => {
+  try {
+    let ratingsObj = {
+      ...req.body,
+      userId: req.body.user.id,
+      legislatorId: req.params.legislatorId,
+    };
+    const oldRating = await Rating.findOne({
+      where: {
+        userId: req.body.user.id,
+        legislatorId: req.params.legislatorId,
+      },
+    });
+    if (!oldRating) {
+      const newRating = await Rating.create(ratingsObj);
+      res.json(newRating);
+    } else {
+      const updatedRating = await oldRating.update(ratingsObj);
+      res.send(updatedRating);
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
+// if (idAsBLK) {
+//   legislators[legislators.name].blackRatings.addRating();
 // }
+// legislators[legislators.name].totalRatings.addRating();
 
-// class LegislatorRating {
-//     constructor() {
-//         this.totalRatings = new AvgRating();
-//         this.blackRatings = new AvgRating();
-//     }
-
-// }
-
-// const legislators = {}
-
-// router.post('/', async(req, res, next) => {
-//     try {
-//         const newRating = await Rating.create(req.body);
-//         res.json(newRating);
-
-//         if (user.isBlack) {
-//             legislators[legislators.name].blackRatings.addRating()
-//         }
-//         legislators[legislators.name].totalRatings.addRating()
-
-//         return []
-
-//     } catch (error) {
-//         next(error);
-//     }
-// });
+// return [];
 
 // router.get('/', async(req, res, next) => {
 //     try {
@@ -57,21 +96,21 @@ const sequelize = new Sequelize('postgres://localhost:5432/rateyourrep');
 //             where: { legislatorId: id },
 //             attributes: [
 //                 'legislatorId', [
-//                     sequelize.fn('AVG', sequelize.col('transparency')),
+//                     Sequelize.fn('AVG', sequelize.col('transparency')),
 //                     'transparencyCount',
 //                 ],
 //                 [
-//                     sequelize.fn('AVG', sequelize.col('publicEngagement')),
+//                     Sequelize.fn('AVG', sequelize.col('publicEngagement')),
 //                     'publicEngagementCount',
 //                 ],
 //                 [
-//                     sequelize.fn('AVG', sequelize.col('alignWithValues')),
+//                     Sequelize.fn('AVG', sequelize.col('alignWithValues')),
 //                     'alignWithValuesCount',
 //                 ],
 //             ],
 //             group: 'legislatorId',
 //             order: [
-//                 [sequelize.fn('AVG', sequelize.col('legislatorId')), 'DESC']
+//                 [Sequelize.fn('AVG', Sequelize.col('legislatorId')), 'DESC']
 //             ],
 //         });
 //         res.json(ratingAvg);
