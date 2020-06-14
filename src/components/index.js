@@ -10,3 +10,4 @@ export {default as Legislators} from './legislators'
 export {default as LegislatorLanding} from './legislator-landing'
 export {default as LegislatorProfile} from './legislator-profile'
 export {default as LegislatorRatings} from './legislator-ratings'
+export { default as AddRating } from './AddRating';

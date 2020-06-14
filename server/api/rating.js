@@ -4,6 +4,7 @@ const Sequelize = require('sequelize');
 const { AvgRating, LegislatorRating } = require('./ratingsFuncs');
 
 router.post('/:legislatorId', async (req, res, next) => {
+  console.log('OUTPUT: in point******');
   try {
     let ratingsObj = {
       ...req.body,

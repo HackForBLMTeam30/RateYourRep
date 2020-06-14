@@ -87,7 +87,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getAllLegislators: (address) => dispatch(getAllLegislators(address)),
-  me: (address) => dispatch(me()),
+  me: () => dispatch(me()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Legislators);

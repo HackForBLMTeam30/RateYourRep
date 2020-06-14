@@ -1,13 +1,13 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import PropTypes from 'prop-types'
-import {auth} from '../store'
+import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { auth } from '../store';
 
 /**
  * COMPONENT
  */
-const AuthForm = props => {
-  const {name, displayName, handleSubmit, error} = props
+const AuthForm = (props) => {
+  const { name, displayName, handleSubmit, error } = props;
 
   return (
     <div>
@@ -87,8 +87,8 @@ const AuthForm = props => {
           {error && error.response && <div> {error.response.data} </div>}
         </form>
     </div>
-  )
-}
+  );
+};
 
 /**
  * CONTAINER
@@ -97,47 +97,61 @@ const AuthForm = props => {
  *   function, and share the same Component. This is a good example of how we
  *   can stay DRY with interfaces that are very similar to each other!
  */
-const mapLogin = state => {
+const mapLogin = (state) => {
   return {
     name: 'login',
     displayName: 'Login',
-    error: state.user.error
-  }
-}
+    error: state.user.error,
+  };
+};
 
-const mapSignup = state => {
+const mapSignup = (state) => {
   return {
     name: 'signup',
     displayName: 'Sign Up',
-    error: state.user.error
-  }
-}
+    error: state.user.error,
+  };
+};
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
-      evt.preventDefault()
-      const formName = evt.target.name
-      const email = evt.target.email.value
-      const password = evt.target.password.value
-      let first_name, last_name, street1, street2, city, state, zip, identity
+      evt.preventDefault();
+      const formName = evt.target.name;
+      const email = evt.target.email.value;
+      const password = evt.target.password.value;
+      let first_name, last_name, street1, street2, city, state, zip, identity;
       if (formName === 'signup') {
-        first_name = evt.target.first_name.value
-        last_name = evt.target.last_name.value
-        street1 = evt.target.street1.value
-        street2 = evt.target.street2.value
-        city = evt.target.city.value
-        state = evt.target.state.value
-        zip = evt.target.zip.value
-        identity = evt.target.identity.checked
+        first_name = evt.target.first_name.value;
+        last_name = evt.target.last_name.value;
+        street1 = evt.target.street1.value;
+        street2 = evt.target.street2.value;
+        city = evt.target.city.value;
+        state = evt.target.state.value;
+        zip = evt.target.zip.value;
+        identity = evt.target.identity.checked;
       }
-      dispatch(auth(email, password, formName, first_name, last_name, street1, street2, city, state, zip, identity))
-    }
-  }
-}
+      dispatch(
+        auth(
+          email,
+          password,
+          formName,
+          first_name,
+          last_name,
+          street1,
+          street2,
+          city,
+          state,
+          zip,
+          identity
+        )
+      );
+    },
+  };
+};
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm)
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm)
+export const Login = connect(mapLogin, mapDispatch)(AuthForm);
+export const Signup = connect(mapSignup, mapDispatch)(AuthForm);
 
 /**
  * PROP TYPES
@@ -146,5 +160,5 @@ AuthForm.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  error: PropTypes.object
-}
+  error: PropTypes.object,
+};
