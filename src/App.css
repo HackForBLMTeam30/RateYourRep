@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 . .App-header {
   background-color: #282c34;
   min-height: 100vh;
-=======
 .App {
   text-align: center;
   margin: 16px;
@@ -107,7 +105,6 @@
 }
 
 .user-details, .user-breakdown {
->>>>>>> 4ffd12185a18e644f11e6a1419284b33b8b8d8c6
   display: flex;
   flex-direction: column;
   flex: 1 1 200px;
