@@ -4,7 +4,7 @@ const db = require('../db');
 const Legislator = db.define('legislator', {
   name: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: false
   },
   role: Sequelize.STRING,
   address: Sequelize.STRING,

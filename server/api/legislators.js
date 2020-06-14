@@ -23,16 +23,14 @@ router.get('/', async(req, res, next) => {
             const {name, officialIndices} = office
             officialIndices.forEach((office) =>{
                 let official = data.officials[office]
+                if(official.name !== null){
                 let officialObject = {...official, role: name}
                officialsArray.push(officialObject)
+                }
             })
         })
         officialsArray.forEach(async(official) => {
-            console.log(official.address)
-            const person = await Legislator.findOne({where: {name: official.name} })
-            if(!person){
-                Legislator.create(official)
-            }
+            const person = await Legislator.upsert(official)
         })
 
         res.json(officialsArray);
@@ -41,5 +39,12 @@ router.get('/', async(req, res, next) => {
         next(error);
     }
 });
+
+router.get('/:id', async(req, res, next) => {
+    try{
+    let id = req.params.id,
+    console.log(id)
+    }
+})
 
 module.exports = router;
