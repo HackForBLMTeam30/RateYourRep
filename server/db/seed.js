@@ -137,11 +137,11 @@ const users = [
 ];
 
 const ratings = [
-  {userId: 1, legislatorId: 1, transparency: 3, publicEngagement: 2, alignWithValues: 4, description: "They are someone I can get behind."},
-  {userId: 2, legislatorId: 1, transparency: 2, publicEngagement: 3, alignWithValues: 5, description: "I don't like that they do not always publicly announce their plans, but they get the job done."},
-  {userId: 3, legislatorId: 1, transparency: 1, publicEngagement: 1, alignWithValues: 1, description: "I can't stand them, they completely disregard the public need and have done so for years."},
-  {userId: 4, legislatorId: 1, transparency: 3, publicEngagement: 5, alignWithValues: 4, description: "They came by the community center and spoke with kids about the dangers of drugs and alcohol abuse. They have good intentions."},
-  {userId: 5, legislatorId: 1, transparency: 2, publicEngagement: 2, alignWithValues: 3, description: ""},
+  {userId: 1, legislatorId: 1, transparency: 1, publicEngagement: 0, alignWithValues: 1, description: "I can't stand them, they completely disregard the public need and have done so for years."},
+  {userId: 2, legislatorId: 1, transparency: 1, publicEngagement: 0, alignWithValues: 1, description: "This tyranny needs to stop, what have they done to help the lower class?"},
+  {userId: 3, legislatorId: 1, transparency: 2, publicEngagement: 1, alignWithValues: 4, description: "I don't like that they do not always publicly announce their plans, but they get the job done."},
+  {userId: 4, legislatorId: 1, transparency: 2, publicEngagement: 2, alignWithValues: 4, description: "They are someone I can get behind."},
+  {userId: 5, legislatorId: 1, transparency: 3, publicEngagement: 5, alignWithValues: 4, description: "They came by the community center and spoke with kids about the dangers of drugs and alcohol abuse. They have good intentions."},
 ]
 
 async function seed() {
