@@ -16,9 +16,9 @@ const AuthForm = (props) => {
     <div id="login-flex">
       <div className="form-div">
         <form onSubmit={handleSubmit} name={name}>
-          <h3>{name.toUpperCase()}</h3>
+          <h3>{displayName.toUpperCase()}</h3>
           {name === 'signup' && (
-            <React.Fragment>
+            <>
               <label htmlFor="first_name">
                 <small>First Name</small>
               </label>
@@ -54,23 +54,25 @@ const AuthForm = (props) => {
               </label>
               <input name="zip" type="text" />
               <label htmlFor="identity">
-                <small>Do you identify as Black?</small>
+                <small>Do you identify as Black or African American?</small>
               </label>
               <input name="identity" type="checkbox" />
-            </React.Fragment>
+            </>
           )}
-          <div>
-            <label htmlFor="email">
-              <small>Email</small>
-            </label>
-            <input name="email" type="text" />
+
+          <div className="input-div">
+            <input name="email" type="text" placeholder="email" />
           </div>
-          <div>
-            <label htmlFor="password">
-              <small>Password</small>
-            </label>
-            <input name="password" type="password" autoComplete="on" />
+
+          <div className="input-div">
+            <input
+              name="password"
+              type="password"
+              placeholder="password"
+              autoComplete="on"
+            />
           </div>
+
           <div>
             <button type="submit">{displayName}</button>
           </div>
@@ -98,7 +100,7 @@ const AuthForm = (props) => {
 const mapLogin = (state) => {
   return {
     name: 'login',
-    displayName: 'Login',
+    displayName: 'Log In',
     error: state.user.error,
   };
 };

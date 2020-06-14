@@ -4,7 +4,7 @@
   font-family: Poppins;
   font-style: normal;
   font-weight: 600;
-  font-size: 36px;
+  font-size: 30px;
   line-height: 54px;
 }
 .logo-div {
@@ -23,11 +23,12 @@
 .form-div {
   width: 720px;
   height: 900px;
+  display: flex;
+  justify-content: center;
 }
 form {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   font-family: Poppins;
   font-style: normal;
   font-weight: 600;
@@ -49,6 +50,31 @@ form {
 .label {
   width: 50px;
 }
-.input {
-  width: 50px;
+input {
+  width: 10em;
+  background-color: #f5f5f5;
+  border: none;
+}
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.input-div {
+  border-bottom: 10px;
+  padding: 10px;
+}
+button {
+  width: 10em;
+  background-color: #5fc4e3;
+  border: none;
+}
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 5px 3px lightgrey;
+}
+.nav-logo {
+  color: #5fc4e3;
+  margin-left: 5px;
 }
