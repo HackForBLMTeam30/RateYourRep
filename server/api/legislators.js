@@ -2,6 +2,8 @@ const router = require('express').Router();
 const axios = require('axios');
 const apiKey = require('../../config/key').key;
 const { Legislator, Rating } = require('../db/models');
+const { AvgRating } = require('./ratingsFuncs');
+const Sequelize = require('sequelize');
 
 router.get('/', async (req, res, next) => {
   const inputAddress = req.query.address;
@@ -28,24 +30,114 @@ router.get('/', async (req, res, next) => {
         }
       });
     });
-    officialsArray.forEach(async (official) => {
-      console.log(official.address);
-      const person = await Legislator.findOne(
-        { where: { name: official.name, role: official.role } },
-        {
-          include: [
-            {
-              model: Rating,
-            },
+    let DBArray = [];
+    let itemsProcessed = 0;
+    const response = () => {
+      DBArray.forEach(async (official) => {
+        let id = official.id;
+        const [ratingAvg, metadata] = await Rating.findAll({
+          where: { legislatorId: id },
+          attributes: [
+            'legislatorId',
+            [
+              Sequelize.fn('SUM', Sequelize.col('transparency')),
+              'transparencySUM',
+            ],
+            [
+              Sequelize.fn('SUM', Sequelize.col('publicEngagement')),
+              'publicEngagementSUM',
+            ],
+            [
+              Sequelize.fn('SUM', Sequelize.col('alignWithValues')),
+              'alignWithValuesSUM',
+            ],
+            [
+              Sequelize.fn('AVG', Sequelize.col('transparency')),
+              'transparencyAVG',
+            ],
+            [
+              Sequelize.fn('AVG', Sequelize.col('publicEngagement')),
+              'publicEngagementAVG',
+            ],
+            [
+              Sequelize.fn('AVG', Sequelize.col('alignWithValues')),
+              'alignWithValuesAVG',
+            ],
+            [
+              Sequelize.fn('COUNT', Sequelize.col('transparency')),
+              'transparencyCount',
+            ],
+            [
+              Sequelize.fn('COUNT', Sequelize.col('alignWithValues')),
+              'alignWithValuesCount',
+            ],
+            [
+              Sequelize.fn('COUNT', Sequelize.col('publicEngagement')),
+              'publicEngagementCount',
+            ],
           ],
+          group: 'legislatorId',
+          order: [[Sequelize.fn('AVG', Sequelize.col('legislatorId')), 'DESC']],
+        });
+        if (ratingAvg) {
+          let ratingsAndCount = ratingAvg.get({ plain: true });
+          const {
+            transparencySUM,
+            publicEngagementSUM,
+            alignWithValuesSUM,
+            transparencyCount,
+            publicEngagementCount,
+            alignWithValuesCount,
+            transparencyAVG,
+            publicEngagementAVG,
+            alignWithValuesAVG,
+          } = ratingsAndCount;
+          //   let totalOfAverages = parseFloat(
+          //     transparencyAVG + publicEngagementAVG + alignWithValuesAVG
+          //   );
+          let totalOfAverages = parseFloat(
+            +transparencySUM + +publicEngagementSUM + +alignWithValuesSUM
+          );
+
+          let totalCount =
+            +transparencyCount + +publicEngagementCount + +alignWithValuesCount;
+          official.AverageRating = new AvgRating(
+            totalOfAverages,
+            totalCount,
+            +transparencySUM,
+            +publicEngagementSUM,
+            +alignWithValuesSUM
+          );
+          official.AverageRating.getRating('all');
+          official.AverageRating.getRating('transparency');
+          official.AverageRating.getRating('alignWithValues');
+          official.AverageRating.getRating('publicEngagement');
+          console.log(official.AverageRating.getRating('all'));
         }
-      );
+      });
+
+      console.log(DBArray);
+      res.send(DBArray);
+    };
+    officialsArray.forEach(async (official) => {
+      const person = await Legislator.findOne({
+        where: { name: official.name, role: official.role },
+
+        include: {
+          model: Rating,
+        },
+      });
       if (!person) {
-        Legislator.create(official);
+        let person = await Legislator.create(official);
+        DBArray.push(person.get({ plain: true }));
+      } else {
+        DBArray.push(person.get({ plain: true }));
+      }
+      itemsProcessed++;
+      if (itemsProcessed === officialsArray.length) {
+        response();
       }
     });
-
-    res.json(officialsArray);
   } catch (error) {
     next(error);
   }
@@ -54,16 +146,12 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     let id = req.params.id;
-    const legislator = await Legislator.findOne(
-      { where: { id } },
-      {
-        include: [
-          {
-            model: Rating,
-          },
-        ],
-      }
-    );
+    const legislator = await Legislator.findOne({
+      where: { id },
+      include: {
+        model: Rating,
+      },
+    });
     res.send(legislator);
   } catch (error) {
     next(error);

@@ -1,33 +1,32 @@
-import axios from 'axios'
+import axios from 'axios';
 
-
-const GOT_ALL_LEGISLATORS = 'GOT_ALL_LEGISLATORS'
+const GOT_ALL_LEGISLATORS = 'GOT_ALL_LEGISLATORS';
 
 export const gotAllLegislators = (legislators) => ({
   type: GOT_ALL_LEGISLATORS,
-  legislators
-})
+  legislators,
+});
 
 export const getAllLegislators = (addressString) => {
-  return async dispatch => {
-    try{
-      const {data} = await axios.get('/api/legislators', {
-    params: {
-      address: addressString
-    }})
-      dispatch(gotAllLegislators(data))
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get('/api/legislators', {
+        params: {
+          address: addressString,
+        },
+      });
+      dispatch(gotAllLegislators(data));
+    } catch (error) {
+      console.error(error);
     }
-    catch(error){
-      console.error(error)
-    }
-  }
-}
+  };
+};
 
-export default function (legislators = [], action){
-  switch(action.type){
+export default function (legislators = [], action) {
+  switch (action.type) {
     case GOT_ALL_LEGISLATORS:
-      return action.legislators
+      return action.legislators;
     default:
-      return legislators
+      return legislators;
   }
 }
