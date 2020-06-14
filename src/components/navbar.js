@@ -14,11 +14,26 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           <Link className="nav-text" to="/home">
             Home
           </Link>
+          <Link className="nav-text" to="/signup">
+            Sign Up
+          </Link>
+          <Link className="nav-text" to="/login">
+            Log In
+          </Link>
           <a className="nav-text" href="#" onClick={handleClick}>
             Logout
           </a>
         </div>
-      ) : null}
+      ) : (
+        <div className="nav-links-div">
+          <Link className="nav-text" to="/signup">
+            Sign Up
+          </Link>
+          <Link className="nav-text" to="/login">
+            Log In
+          </Link>
+        </div>
+      )}
     </nav>
   </div>
 );

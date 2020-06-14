@@ -56,6 +56,12 @@ input {
   border: none;
   font-size: 20px;
 }
+label {
+  width: 300px;
+  background-color: #f5f5f5;
+  border: none;
+  font-size: 20px;
+}
 .form-container {
   display: flex;
   justify-content: center;
@@ -114,4 +120,18 @@ button {
   text-decoration: none;
   color: #5fc4e3;
   margin-top: 20px;
+}
+.move-signup {
+  display: flex;
+  flex-direction: column;
+}
+small {
+  font-size: 20px;
+  border: 2px solid blue;
+}
+.smaller-button {
+  width: 100px;
+  font-size: 14px;
+  text-decoration: none;
+  margin-left: 5px;
 }
