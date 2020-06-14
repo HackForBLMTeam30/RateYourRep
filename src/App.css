@@ -33,11 +33,11 @@
   }
 }
 
-a:link {
+button a:link {
   color: white;
 }
 
-a:visited {
+button a:visited {
   color: white;
 }
 
