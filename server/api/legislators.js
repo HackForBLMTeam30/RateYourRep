@@ -157,6 +157,8 @@ router.get('/', async (req, res, next) => {
             +publicEngagementSUM,
             +alignWithValuesSUM
           );
+          official.overallRating = official.AverageRating.getRating('all')
+          official.overallBlkRating = official.AverageBLKRating.getRating('all')
         }
         seconditemsProcessed++;
         if (seconditemsProcessed === DBArray.length) {

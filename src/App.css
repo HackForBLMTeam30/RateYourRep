@@ -1,23 +1,155 @@
+<<<<<<< HEAD
 . .App-header {
   background-color: #282c34;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+=======
+.App {
+  text-align: center;
+  margin: 16px;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* LEGISLATOR LANDING */
+#summary {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#basic-info {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+#basic-details,
+#score {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#legislator-photo {
+  align-self: center;
+  margin: 16px;
+}
+
+#score {
+  margin: 0px 16px;
+}
+
+#legislator-profile {
+  text-align: left;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#ratings-container {
+  text-align: left;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#legislator-ratings {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 16px 0px;
+}
+
+.legislator-rating {
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0px 8px 12px lightgray;
+  border-radius: 2px;
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0px;
+}
+
+.user-details, .user-breakdown {
+>>>>>>> 4ffd12185a18e644f11e6a1419284b33b8b8d8c6
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 200px;
+  margin: 0px 16px;
+}
+
+.user-scoring {
+  text-align: left;
+  margin: 0px 16px;
+  flex: 3 3 500px;
+}
+
+.primary-btn {
+  background-color: rgb(66, 188, 221);
+  padding: 8px 16px;
+  border-radius: 3px;
+  border: none;
+  color: white;
+  font-weight: bold;
+}
+
+/* RATING CSS */
+
+.btn-rating {
+    float: right;
+}
+
+
+/* UTILITY */
+
+.mb-2 {
+    margin-bottom: 2rem !important;
+}
+
+.primary-color {
+    background-color: #56ccf2 !important;
+}
+
+.blue {
+    color: #56ccf2 !important;
+}
+
+.white {
+    color: white !important;
 }
