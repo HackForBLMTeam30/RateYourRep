@@ -1,26 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllLegislators } from '../store/legislator';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Avatar from '@material-ui/core/Avatar';
-import Container from '@material-ui/core/Container';
+import { me } from '../store/user';
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Avatar,
+  Container,
+} from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 export class Legislators extends Component {
-  componentDidMount() {
-    let address = '31-46 14th. st. apt. 4 astoria ny 11106';
+  async componentDidMount() {
+    await this.props.me();
+    const { user } = this.props;
+    const address = user.address;
     this.props.getAllLegislators(address);
   }
   render() {
-    console.log(this.props);
     return (
       <Container>
         <TableContainer component={Paper}>
@@ -63,10 +66,12 @@ export class Legislators extends Component {
 
 const mapStateToProps = (state) => ({
   legislators: state.legislators,
+  user: state.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getAllLegislators: (address) => dispatch(getAllLegislators(address)),
+  me: (address) => dispatch(me()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Legislators);
