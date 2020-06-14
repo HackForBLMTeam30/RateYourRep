@@ -2,6 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { auth } from '../store';
+import '../login.css';
+import house from '../assets/house.svg';
+import trending from '../assets/trending.svg';
+import { Link } from 'react-router-dom';
 
 /**
  * COMPONENT
@@ -10,82 +14,94 @@ const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
 
   return (
-    <div>
-      <form
-          className="authentication-form"
-          onSubmit={handleSubmit}
-          name={name}
-        >
-          <h3>{name.toUpperCase()}</h3>
+    <div id="login-flex">
+      <div className="form-div">
+        <form onSubmit={handleSubmit} name={name}>
+          <h3>{displayName.toUpperCase()}</h3>
           {name === 'signup' && (
-            <React.Fragment>
-              <div>
-                <label htmlFor="first_name">
-                  <small>First Name</small>
-                </label>
-                <input name="first_name" type="text" />
-              </div>
-              <div>
-                <label htmlFor="last_name">
-                  <small>Last Name</small>
-                </label>
-                <input name="last_name" type="text" />
-              </div>
-              <div>
-                <label htmlFor="street1">
-                  <small>Street Address 1</small>
-                </label>
-                <input name="street1" type="text" />
-              </div>
-              <div>
-                <label htmlFor="street2">
-                  <small>Street Address 2</small>
-                </label>
-                <input name="street2" type="text" />
-              </div>
-              <div>
-                <label htmlFor="city">
-                  <small>City</small>
-                </label>
-                <input name="city" type="text" />
-              </div>
-              <div>
-                <label htmlFor="state">
-                  <small>State</small>
-                </label>
-                <input name="state" type="text" />
-              </div>
-              <div>
-                <label htmlFor="zip">
-                  <small>Zip Code</small>
-                </label>
-                <input name="zip" type="text" />
-              </div>
-              <div>
+            <>
+              {/* <label htmlFor="first_name">
+                <small>First Name</small>
+              </label> */}
+              <input placeholder="First Name" name="first_name" type="text" />
+
+              {/* <label htmlFor="last_name">
+                <small>Last Name</small>
+              </label> */}
+              <input placeholder=" Last Name" name="last_name" type="text" />
+
+              {/* <label htmlFor="street1">
+                <small>Street Address 1</small>
+              </label> */}
+              <input
+                placeholder="Street Address 1"
+                name="street1"
+                type="text"
+              />
+
+              {/* <label htmlFor="street2">
+                <small>Street Address 2</small>
+              </label> */}
+
+              <input
+                placeholder="Street Address 2"
+                name="street2"
+                type="text"
+              />
+
+              {/* <label htmlFor="city">
+                <small>City</small>
+              </label> */}
+              <input placeholder="City" name="city" type="text" />
+
+              {/* <label className="label" htmlFor="state">
+                <small>State</small>
+              </label> */}
+              <input
+                placeholder="State"
+                className="input"
+                name="state"
+                type="text"
+              />
+
+              {/* <label htmlFor="zip">
+                <small>Zip Code</small>
+              </label> */}
+              <input placeholder="Zip Code" name="zip" type="text" />
+              <div className="move-checkbox">
                 <label htmlFor="identity">
                   <small>Do you identify as Black or African American?</small>
                 </label>
                 <input name="identity" type="checkbox" />
               </div>
-            </React.Fragment>
+            </>
           )}
-          <div>
-            <label htmlFor="email">
-              <small>Email</small>
-            </label>
-            <input name="email" type="text" />
+          <div className="input-div">
+            <input name="email" type="text" placeholder="email" />
           </div>
-          <div>
-            <label htmlFor="password">
-              <small>Password</small>
-            </label>
-            <input name="password" type="password" autoComplete="on" />
+
+          <div className="input-div">
+            <input
+              name="password"
+              type="password"
+              placeholder="password"
+              autoComplete="on"
+            />
           </div>
+
           <div>
             <button type="submit">{displayName}</button>
           </div>
           {error && error.response && <div> {error.response.data} </div>}
         </form>
+      </div>
+      <div className="logo-div">
+        <div className="logo-container">
+          <img src={trending} alt="trending"></img>
+          <h3 className="logo-name">Rate Your Rep</h3>
+          <img src={house} alt="house"></img>
+        </div>
+      </div>
     </div>
   );
 };
@@ -100,7 +116,7 @@ const AuthForm = (props) => {
 const mapLogin = (state) => {
   return {
     name: 'login',
-    displayName: 'Login',
+    displayName: 'Log In',
     error: state.user.error,
   };
 };
