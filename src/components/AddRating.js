@@ -46,7 +46,7 @@ class AddRating extends Component {
   onSubmit(e) {
     e.preventDefault();
     const { id } = this.props.match.params;
-    const { user, legislatorId } = this.props;
+    const { user } = this.props;
     const userId = user.id;
     const newRating = {
       transparency: this.state.transparency,
@@ -57,7 +57,7 @@ class AddRating extends Component {
       legislatorId: id,
     };
     this.props.getAllRatings(newRating, this.props.history);
-    this.props.history.push('./');
+    this.props.history.push('/home');
   }
 
   render() {
