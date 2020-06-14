@@ -40,8 +40,9 @@ class LegislatorLanding extends React.Component {
     this.handleProfile = this.handleProfile.bind(this);
   }
   componentDidMount() {
-    // TODO: testing with store, will need dispatch of id to occur on button click to legislator-landing, not on the legislator-landing component. Also, still waiting on overall rating score and breakdown scores from backend calculations.
-    this.props.getActiveLegislator(1);
+    // TODO: Waiting on overall rating score and breakdown scores from backend calculations.
+    const {id} = this.props.match.params
+    this.props.getActiveLegislator(id);
   }
 
   handleProfile() {

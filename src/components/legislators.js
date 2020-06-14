@@ -15,6 +15,8 @@ import {
 } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import history from '../history'
+import { NavLink } from 'react-router-dom'
 
 export class Legislators extends Component {
   async componentDidMount() {
@@ -24,6 +26,8 @@ export class Legislators extends Component {
     this.props.getAllLegislators(address);
   }
   render() {
+    const {legislators} = this.props;
+    console.log(Legislators)
     return (
       <Container>
         <TableContainer component={Paper}>
@@ -38,7 +42,13 @@ export class Legislators extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.props.legislators.map((legislator, key) => {
+              {legislators.map((legislator, key) => {
+                let avgRating, avgBlkRating
+                if (legislator.AverageRating !== undefined) {
+                  console.log("Avg rating: ", legislator.AverageRating)
+                  // avgRating = legislator.AverageRating.getRating('all')
+                  // console.log(avgRating)
+                }
                 return (
                   <TableRow key={key}>
                     <TableCell>
@@ -47,11 +57,14 @@ export class Legislators extends Component {
                     </TableCell>
                     <TableCell>{legislator.role}</TableCell>
                     <TableCell>
-                      <Rating name="simple-controlled" value={3} readOnly />
+                      <Rating name="simple-controlled" value={avgRating} readOnly />
                     </TableCell>
                     <TableCell>{legislator.party}</TableCell>
                     <TableCell align="center">
-                      <ChevronRightIcon fontSize="large" />
+                      <NavLink to={`/legislator-landing/${legislator.id}`}>
+                      <ChevronRightIcon fontSize="large"  />
+                      </NavLink>
+
                     </TableCell>
                   </TableRow>
                 );
