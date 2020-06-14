@@ -72,7 +72,7 @@ const createApp = () => {
 const startListening = () => {
   // start listening (and create a 'server' object representing our server)
   app.listen(PORT, () =>
-    console.log(`Mixing it up on port ${PORT}`)
+    console.log(`Rating Reps on Port: ${PORT}`)
   )
 }
 
@@ -80,7 +80,7 @@ const syncDb = () => db.sync()
 
 async function bootApp() {
   await sessionStore.sync()
-  await syncDb()
+  await syncDb({force: true})
   await createApp()
   await startListening()
 }
