@@ -15,9 +15,9 @@ export const UserHome = (props) => {
         <div className="nav-box">
           <h4>Your Ratings</h4>
           <p className="nav-text">Welcome, {email}</p>
-          <button>
+          <button className="primary-btn">
             <Link className="link-fix" to="/ratings">
-              Get All Ratings
+              View Your Ratings
             </Link>
           </button>
         </div>
@@ -27,9 +27,9 @@ export const UserHome = (props) => {
           <p className="nav-text">
             Track your legislators and see their ratings
           </p>
-          <button>
+          <button className="primary-btn">
             <Link className="link-fix" to="/legislators">
-              Get Your Legislators
+              View Your Legislators
             </Link>
           </button>
         </div>
