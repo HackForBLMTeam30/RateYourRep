@@ -51,9 +51,10 @@ form {
   width: 50px;
 }
 input {
-  width: 10em;
+  width: 300px;
   background-color: #f5f5f5;
   border: none;
+  font-size: 20px;
 }
 .form-container {
   display: flex;
@@ -65,7 +66,7 @@ input {
   padding: 10px;
 }
 button {
-  width: 10em;
+  width: 300px;
   background-color: #5fc4e3;
   border: none;
 }
@@ -77,4 +78,26 @@ button {
 .nav-logo {
   color: #5fc4e3;
   margin-left: 5px;
+}
+.links-div {
+  display: flex;
+  justify-content: space-around;
+}
+.nav-box {
+  border: 2px solid #5fc4e3;
+  padding: 40px 60px;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+}
+.link-fix {
+  text-decoration: none;
+  font-size: 20px;
+}
+.box-text {
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
 }
