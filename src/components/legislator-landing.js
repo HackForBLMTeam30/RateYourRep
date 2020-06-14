@@ -108,7 +108,6 @@ class LegislatorLanding extends React.Component {
           <Tooltip title="Black or African American" aria-label="identity" arrow><div><StyledRating
             defaultValue={activeLegislator.overallBlkRating}
             precision={0.1}
-            onHover
             readOnly
           /></div></Tooltip>
         </div>

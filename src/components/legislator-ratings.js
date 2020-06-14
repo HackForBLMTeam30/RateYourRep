@@ -58,7 +58,8 @@ const LegislatorRatings = (props) => {
   ];
   return (
     <div id="ratings-container">
-      <h3 id="ratings-title">Reviews</h3>
+      <h3>Reviews</h3>
+      <button className="primary-btn">ADD REVIEW</button>
       <div id="legislator-ratings">
         {legislatorRatings.map((rating, idx) => {
           return (

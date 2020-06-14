@@ -113,3 +113,11 @@
   flex: 3 3 500px;
 }
 
+.primary-btn {
+  background-color: rgb(66, 188, 221);
+  padding: 8px 16px;
+  border-radius: 3px;
+  border: none;
+  color: white;
+  font-weight: bold;
+}
