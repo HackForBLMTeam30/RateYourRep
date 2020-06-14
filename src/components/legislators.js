@@ -1,37 +1,77 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {getAllLegislators} from '../store/legislator'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getAllLegislators } from '../store/legislator';
+import { me } from '../store/user';
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Avatar,
+  Container,
+} from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
-export class Legislators extends Component{
-
-  componentDidMount(){
-    let address = '31-46 14th. st. apt. 4 astoria ny 11106'
-    this.props.getAllLegislators(address)
+export class Legislators extends Component {
+  async componentDidMount() {
+    await this.props.me();
+    const { user } = this.props;
+    const address = user.address;
+    this.props.getAllLegislators(address);
   }
-  render(){
-    console.log(this.props)
-    return(
-      <>
-      {this.props.legislators.map((legislator) => {
-        return (<><h1>{legislator.name}</h1>
-        <h1>{legislator.address}</h1></>
-        )
-      })}
-
-      </>
-
-    )
+  render() {
+    return (
+      <Container>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Legislator</TableCell>
+                <TableCell>Role</TableCell>
+                <TableCell>Rating</TableCell>
+                <TableCell>Party</TableCell>
+                <TableCell>Details</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {this.props.legislators.map((legislator, key) => {
+                return (
+                  <TableRow key={key}>
+                    <TableCell>
+                      <Avatar alt="legislator img" src={legislator.photoUrl} />
+                      {legislator.name}
+                    </TableCell>
+                    <TableCell>{legislator.role}</TableCell>
+                    <TableCell>
+                      <Rating name="simple-controlled" value={3} readOnly />
+                    </TableCell>
+                    <TableCell>{legislator.party}</TableCell>
+                    <TableCell align="center">
+                      <ChevronRightIcon fontSize="large" />
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Container>
+    );
   }
 }
 
-
-
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   legislators: state.legislators,
-})
+  user: state.user,
+});
 
-const mapDispatchToProps = dispatch => ({
-  getAllLegislators: (address) => dispatch(getAllLegislators(address))
-})
+const mapDispatchToProps = (dispatch) => ({
+  getAllLegislators: (address) => dispatch(getAllLegislators(address)),
+  me: (address) => dispatch(me()),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Legislators)
+export default connect(mapStateToProps, mapDispatchToProps)(Legislators);
