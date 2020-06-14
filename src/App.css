@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  margin: 16px;
 }
 
 .App-logo {
@@ -35,4 +36,43 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* LEGISLATOR LANDING */
+#summary {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#basic-info {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+#basic-details,
+#score {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#legislator-photo {
+  align-self: center;
+  margin: 16px;
+}
+
+#score {
+  margin: 0px 16px;
+}
+
+#legislator-profile {
+  text-align: left;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
