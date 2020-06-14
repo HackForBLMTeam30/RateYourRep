@@ -74,10 +74,6 @@ router.get('/', async (req, res, next) => {
         });
         const [BLKRatingAvg, BLKmetadata] = await Rating.findAll({
           where: { legislatorId: id },
-          include: {
-            model: User,
-            where: { identifyAsBLK: true },
-          },
           attributes: [
             'legislatorId',
             [
@@ -105,6 +101,10 @@ router.get('/', async (req, res, next) => {
               'publicEngagementCount',
             ],
           ],
+          include: {
+            model: User,
+            where: { identifyAsBLK: true },
+          },
           group: ['rating.legislatorId', 'user.id'],
           order: [[Sequelize.fn('AVG', Sequelize.col('legislatorId')), 'DESC']],
         });
@@ -126,7 +126,7 @@ router.get('/', async (req, res, next) => {
 
           let totalCount =
             +transparencyCount + +publicEngagementCount + +alignWithValuesCount;
-          official.AverageRating = new AvgRating(
+          official.AverageBLKRating = new AvgRating(
             totalOfCategories,
             totalCount,
             +transparencySUM,
@@ -150,7 +150,7 @@ router.get('/', async (req, res, next) => {
 
           let totalCount =
             +transparencyCount + +publicEngagementCount + +alignWithValuesCount;
-          official.AverageBLKRating = new AvgRating(
+          official.AverageRating = new AvgRating(
             totalOfCategories,
             totalCount,
             +transparencySUM,
