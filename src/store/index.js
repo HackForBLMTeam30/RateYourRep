@@ -8,9 +8,9 @@ import activeLegislator from './active-legislator'
 
 const reducer = combineReducers({user, legislators, activeLegislator})
 const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
-)
-const store = createStore(reducer, middleware)
+  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+);
+const store = createStore(reducer, middleware);
 
 export default store
 export * from './user'
