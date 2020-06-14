@@ -1,9 +1,10 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Slider } from "@material-ui/core";
-import { Rating } from "@material-ui/lab";
-import { getAllLegislatorRatings } from "../store/legislator-ratings";
-import { getActiveLegislator } from "../store/active-legislator";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Slider } from '@material-ui/core';
+import { Rating } from '@material-ui/lab';
+import { getAllLegislatorRatings } from '../store/legislator-ratings';
+import { getActiveLegislator } from '../store/active-legislator';
+import { Link } from 'react-router-dom';
 
 class LegislatorRatings extends React.Component {
   constructor(props) {
@@ -28,7 +29,9 @@ class LegislatorRatings extends React.Component {
     return (
       <div id="ratings-container">
         <h3>Reviews</h3>
-        <button className="primary-btn">ADD REVIEW</button>
+        <button className="primary-btn">
+          <Link to="/add-rating">ADD REVIEW</Link>
+        </button>
         <div id="legislator-ratings">
           {legislatorRatings &&
             legislatorRatings.map((rating, idx) => {
