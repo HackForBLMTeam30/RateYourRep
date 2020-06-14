@@ -76,3 +76,40 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+#ratings-container {
+  text-align: left;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#legislator-ratings {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.legislator-rating {
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0px 8px 12px lightgray;
+  border-radius: 2px;
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0px;
+}
+
+.user-details, .user-breakdown {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 200px;
+  margin: 0px 16px;
+}
+
+.user-scoring {
+  text-align: left;
+  margin: 0px 16px;
+  flex: 3 3 500px;
+}
+

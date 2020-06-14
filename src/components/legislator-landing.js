@@ -2,9 +2,9 @@ import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
-import { Avatar, Button } from "@material-ui/core";
+import { Avatar, Button, Tooltip } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
-import {LegislatorProfile} from './index'
+import {LegislatorProfile, LegislatorRatings} from './index'
 import {getActiveLegislator} from '../store/active-legislator'
 
 const styles = (theme) => ({
@@ -21,8 +21,17 @@ const styles = (theme) => ({
   large: {
     width: theme.spacing(16),
     height: theme.spacing(16),
-  },
+  }
 });
+
+const StyledRating = withStyles({
+  iconFilled: {
+    color: 'black',
+  },
+  iconHover: {
+    color: '#ff3d47',
+  },
+})(Rating);
 
 class LegislatorLanding extends React.Component {
   constructor() {
@@ -63,6 +72,7 @@ class LegislatorLanding extends React.Component {
     //     },
     //   ],
     //   overallRating: 2.3,
+    //   overallBlkRating: 1.8
     // };
     return (
       <div>
@@ -79,7 +89,7 @@ class LegislatorLanding extends React.Component {
             <h3>{activeLegislator.name}</h3>
             <h4>Role: {activeLegislator.role}</h4>
             <Button
-              variant="contained"
+              variant="outlined"
               color="primary"
               onClick={() => this.handleProfile()}
             >
@@ -90,15 +100,20 @@ class LegislatorLanding extends React.Component {
         <div id="score">
           <h3>Overall Rating:</h3>
           {/* TODO: Pending overall rating score and breakdown scores from backend calculations. */}
-          <Rating
+          <Tooltip title="All" aria-label="identity" arrow><div><Rating
             defaultValue={activeLegislator.overallRating}
             precision={0.1}
             readOnly
-          />
-          <h5>{activeLegislator.overallRating}</h5>
+          /></div></Tooltip>
+          <Tooltip title="Black or African American" aria-label="identity" arrow><div><StyledRating
+            defaultValue={activeLegislator.overallBlkRating}
+            precision={0.1}
+            onHover
+            readOnly
+          /></div></Tooltip>
         </div>
       </div>
-      {displayProfile ? <LegislatorProfile activeLegislator={activeLegislator} /> : null}
+      {displayProfile ? <LegislatorProfile activeLegislator={activeLegislator} /> : <LegislatorRatings activeLegislator={activeLegislator} />}
       </div>
     );
   }
