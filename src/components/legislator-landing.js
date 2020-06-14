@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { Avatar, Button } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import {LegislatorProfile} from './index'
+import {getActiveLegislator} from '../store/active-legislator'
 
 const styles = (theme) => ({
   root: {
@@ -30,8 +31,8 @@ class LegislatorLanding extends React.Component {
     this.handleProfile = this.handleProfile.bind(this);
   }
   componentDidMount() {
-    // props from connecting to Redux store
-    // const {legislator} = this.props
+    // TODO: testing with store, will need dispatch of id to occur on button click to legislator-landing, not on the legislator-landing component. Also, still waiting on overall rating score and breakdown scores from backend calculations.
+    this.props.getActiveLegislator(1);
   }
 
   handleProfile() {
@@ -39,46 +40,46 @@ class LegislatorLanding extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { activeLegislator, classes } = this.props;
     const {displayProfile} = this.state;
     // dummy data
-    let legislator = {
-      name: "Mike Pence",
-      role: "Vice President of the United States",
-      address: "1600 Pennsylvania Avenue Northwest Washington DC 20500",
-      party: "Republican Party",
-      phones: ["(202) 456-1111"],
-      urls: ["https://www.whitehouse.gov/"],
-      photoUrl:
-        "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/45/VPE%20Color.jpg",
-      channels: [
-        {
-          type: "Facebook",
-          id: "mikepence",
-        },
-        {
-          type: "Twitter",
-          id: "VP",
-        },
-      ],
-      overallRating: 2.3,
-    };
+    // let activeLegislator = {
+    //   name: "Mike Pence",
+    //   role: "Vice President of the United States",
+    //   address: "1600 Pennsylvania Avenue Northwest Washington DC 20500",
+    //   party: "Republican Party",
+    //   phones: ["(202) 456-1111"],
+    //   urls: ["https://www.whitehouse.gov/"],
+    //   photoUrl:
+    //     "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/45/VPE%20Color.jpg",
+    //   channels: [
+    //     {
+    //       type: "Facebook",
+    //       id: "mikepence",
+    //     },
+    //     {
+    //       type: "Twitter",
+    //       id: "VP",
+    //     },
+    //   ],
+    //   overallRating: 2.3,
+    // };
     return (
       <div>
       <div id="summary">
         <div id="basic-info">
           <div id="legislator-photo">
             <Avatar
-              alt={legislator.name}
-              src={legislator.photoUrl}
+              alt={activeLegislator.name}
+              src={activeLegislator.photoUrl}
               className={classes.large}
             />
           </div>
           <div id="basic-details">
-            <h3>{legislator.name}</h3>
-            <h4>Role: {legislator.role}</h4>
+            <h3>{activeLegislator.name}</h3>
+            <h4>Role: {activeLegislator.role}</h4>
             <Button
-              variant="outlined"
+              variant="contained"
               color="primary"
               onClick={() => this.handleProfile()}
             >
@@ -88,15 +89,16 @@ class LegislatorLanding extends React.Component {
         </div>
         <div id="score">
           <h3>Overall Rating:</h3>
+          {/* TODO: Pending overall rating score and breakdown scores from backend calculations. */}
           <Rating
-            defaultValue={legislator.overallRating}
+            defaultValue={activeLegislator.overallRating}
             precision={0.1}
             readOnly
           />
-          <h5>{legislator.overallRating}</h5>
+          <h5>{activeLegislator.overallRating}</h5>
         </div>
       </div>
-      {displayProfile ? <LegislatorProfile legislator={legislator} /> : null}
+      {displayProfile ? <LegislatorProfile activeLegislator={activeLegislator} /> : null}
       </div>
     );
   }
@@ -104,11 +106,15 @@ class LegislatorLanding extends React.Component {
 
 const mapState = (state) => {
   return {
-    legislator: state.user.legislator,
+    activeLegislator: state.activeLegislator,
   };
 };
 
+const mapDispatchToProps = dispatch => ({
+  getActiveLegislator: (id) => dispatch(getActiveLegislator(id))
+})
+
 export default compose(
-  connect(mapState, null),
+  connect(mapState, mapDispatchToProps),
   withStyles(styles)
 )(LegislatorLanding);

@@ -1,25 +1,25 @@
 import React from "react";
 
 const LegislatorProfile = (props) => {
-  const { legislator } = props;
+  const { activeLegislator } = props;
   return (
     <div id="legislator-profile">
       <h3>Party Affiliation</h3>
-      <h5>{legislator.party}</h5>
+      <h5>{activeLegislator.party}</h5>
       <br></br>
       <h3>Address</h3>
-      <h5>{legislator.address}</h5>
+      <h5>{activeLegislator.address}</h5>
       <br></br>
       <h3>Contact Info</h3>
-      {legislator.phones.map((phone, idx) => {
+      {activeLegislator.phones.map((phone, idx) => {
         return <h5 key={idx}>{phone}</h5>;
       })}
-      {legislator.urls.map((phone, idx) => {
+      {activeLegislator.urls.map((phone, idx) => {
         return <h5 key={idx}>{phone}</h5>;
       })}
       <br></br>
       <h3>Social Media</h3>
-      {legislator.channels.map((channel, idx) => {
+      {activeLegislator.channels.map((channel, idx) => {
         return (
           <h5 key={idx}>
             {channel.type} Profile: {channel.id}
