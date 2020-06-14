@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllLegislators, getRating } from '../store';
+import { getAllLegislators } from '../store';
 
 export class Legislators extends Component {
   componentDidMount() {
@@ -30,8 +30,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getAllLegislators: (address) => dispatch(getAllLegislators(address)),
-  getRating: (legislatorId, ratingType) =>
-    dispatch(getRating(legislatorId, ratingType)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Legislators);

@@ -4,6 +4,7 @@ const apiKey = require('../../config/key').key;
 const { Legislator, Rating } = require('../db/models');
 const { AvgRating } = require('./ratingsFuncs');
 const Sequelize = require('sequelize');
+const User = require('../db/models/user');
 
 router.get('/', async (req, res, next) => {
   const inputAddress = req.query.address;
@@ -33,6 +34,10 @@ router.get('/', async (req, res, next) => {
     let DBArray = [];
     let itemsProcessed = 0;
     const response = () => {
+      let seconditemsProcessed = 0;
+      let secondresponse = () => {
+        res.send(DBArray);
+      };
       DBArray.forEach(async (official) => {
         let id = official.id;
         const [ratingAvg, metadata] = await Rating.findAll({
@@ -52,18 +57,6 @@ router.get('/', async (req, res, next) => {
               'alignWithValuesSUM',
             ],
             [
-              Sequelize.fn('AVG', Sequelize.col('transparency')),
-              'transparencyAVG',
-            ],
-            [
-              Sequelize.fn('AVG', Sequelize.col('publicEngagement')),
-              'publicEngagementAVG',
-            ],
-            [
-              Sequelize.fn('AVG', Sequelize.col('alignWithValues')),
-              'alignWithValuesAVG',
-            ],
-            [
               Sequelize.fn('COUNT', Sequelize.col('transparency')),
               'transparencyCount',
             ],
@@ -79,6 +72,68 @@ router.get('/', async (req, res, next) => {
           group: 'legislatorId',
           order: [[Sequelize.fn('AVG', Sequelize.col('legislatorId')), 'DESC']],
         });
+        const [BLKRatingAvg, BLKmetadata] = await Rating.findAll({
+          where: { legislatorId: id },
+          include: {
+            model: User,
+            where: { identifyAsBLK: true },
+          },
+          attributes: [
+            'legislatorId',
+            [
+              Sequelize.fn('SUM', Sequelize.col('transparency')),
+              'transparencySUM',
+            ],
+            [
+              Sequelize.fn('SUM', Sequelize.col('publicEngagement')),
+              'publicEngagementSUM',
+            ],
+            [
+              Sequelize.fn('SUM', Sequelize.col('alignWithValues')),
+              'alignWithValuesSUM',
+            ],
+            [
+              Sequelize.fn('COUNT', Sequelize.col('transparency')),
+              'transparencyCount',
+            ],
+            [
+              Sequelize.fn('COUNT', Sequelize.col('alignWithValues')),
+              'alignWithValuesCount',
+            ],
+            [
+              Sequelize.fn('COUNT', Sequelize.col('publicEngagement')),
+              'publicEngagementCount',
+            ],
+          ],
+          group: ['rating.legislatorId', 'user.id'],
+          order: [[Sequelize.fn('AVG', Sequelize.col('legislatorId')), 'DESC']],
+        });
+        if (BLKRatingAvg) {
+          let BLKRatingsAndCount = BLKRatingAvg.get({
+            plain: true,
+          });
+          const {
+            transparencySUM,
+            publicEngagementSUM,
+            alignWithValuesSUM,
+            transparencyCount,
+            publicEngagementCount,
+            alignWithValuesCount,
+          } = BLKRatingsAndCount;
+          let totalOfCategories = parseFloat(
+            +transparencySUM + +publicEngagementSUM + +alignWithValuesSUM
+          );
+
+          let totalCount =
+            +transparencyCount + +publicEngagementCount + +alignWithValuesCount;
+          official.AverageRating = new AvgRating(
+            totalOfCategories,
+            totalCount,
+            +transparencySUM,
+            +publicEngagementSUM,
+            +alignWithValuesSUM
+          );
+        }
         if (ratingAvg) {
           let ratingsAndCount = ratingAvg.get({ plain: true });
           const {
@@ -88,36 +143,26 @@ router.get('/', async (req, res, next) => {
             transparencyCount,
             publicEngagementCount,
             alignWithValuesCount,
-            transparencyAVG,
-            publicEngagementAVG,
-            alignWithValuesAVG,
           } = ratingsAndCount;
-          //   let totalOfAverages = parseFloat(
-          //     transparencyAVG + publicEngagementAVG + alignWithValuesAVG
-          //   );
-          let totalOfAverages = parseFloat(
+          let totalOfCategories = parseFloat(
             +transparencySUM + +publicEngagementSUM + +alignWithValuesSUM
           );
 
           let totalCount =
             +transparencyCount + +publicEngagementCount + +alignWithValuesCount;
-          official.AverageRating = new AvgRating(
-            totalOfAverages,
+          official.AverageBLKRating = new AvgRating(
+            totalOfCategories,
             totalCount,
             +transparencySUM,
             +publicEngagementSUM,
             +alignWithValuesSUM
           );
-          official.AverageRating.getRating('all');
-          official.AverageRating.getRating('transparency');
-          official.AverageRating.getRating('alignWithValues');
-          official.AverageRating.getRating('publicEngagement');
-          console.log(official.AverageRating.getRating('all'));
+        }
+        seconditemsProcessed++;
+        if (seconditemsProcessed === DBArray.length) {
+          secondresponse();
         }
       });
-
-      console.log(DBArray);
-      res.send(DBArray);
     };
     officialsArray.forEach(async (official) => {
       const person = await Legislator.findOne({
