@@ -1,68 +1,39 @@
+# RateYourRep
+
+RateYourRep was created to provide a voice for the public on their local, state, and federal representatives through a ratings and review system that scores a representative on their transparency, public engagement, and if they align with the reviewer’s values. RateYourRep prompts a user for if they identify as Black or African American, allowing them to have their opinions shine and further their importance in changing how our representatives impact different communities.
+
+## Technologies Used
+
+Built with: React, Redux, Node, Express, PostgreSQL, Material-UI, Google Civic Information API
+
+## Features
+
+1. On sign up, you can select if you identify as Black or African American so your rating is counted towards a legislator's separate overall rating with others who also identify as Black or African American.
+2. On sign up, your address determines which legislators you may review. In this way, only those who are actually represented by the legislator can start a dialogue and form a community-wide voice.
+3. Based on your registered address, all local, state, and federal representatives associated with you will be displayed in a list.
+4. Selecting a legislator displays both their overall score from all users and their overall score for users who identify as Black or African American. You will also see a listing of all other user ratings for that legislator.
+5. View a legislator's political details and contact info on their profile.
+6. Add a rating with sliders to score a legislator based on their transparency, public engagement, and if they align with the your values.
+
+## Setup
+
+1.  Clone the repo to your local machine.
+2.  Run `npm install` to install packages.
+3.  Create a PostgreSQL database.
+
+```
+createdb rateyourrep
+```
+
+4.  Run `npm run seed` to populate your database with initial dummy data.
+5.  Run `npm run build` to bundle and build the app for production.
+6.  Run `npm run dev` to start the server up on `localhost:5000`.
+7.  Run `npm run start` to start the front-end up on `localhost:3000` in development mode.
+
+## Credits
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+[Google Civic Information API](https://developers.google.com/civic-information)
 
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+[Material-UI](https://material-ui.com/)
