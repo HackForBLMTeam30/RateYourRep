@@ -5,7 +5,7 @@
   font-style: normal;
   font-weight: 600;
 }
-.logo-div {
+.logoDiv {
   background-color: #5fc4e3;
   width: 720px;
   height: 900px;
@@ -13,12 +13,12 @@
   align-items: center;
   justify-content: center;
 }
-#login-flex {
+#loginFlex {
   display: flex;
   width: 100vw;
   justify-content: space-evenly;
 }
-.form-div {
+.formDiv {
   width: 720px;
   height: 900px;
   display: flex;
@@ -33,7 +33,7 @@ form {
   font-size: 36px;
   line-height: 54px;
 }
-.logo-name {
+.logoName {
   color: #ffffff;
   font-family: 'Poppins';
   font-style: normal;
@@ -41,31 +41,26 @@ form {
   font-size: 56px;
   line-height: 84px;
 }
-.logo-container {
+.logoContainer {
   display: flex;
   flex-direction: column;
 }
 .label {
   width: 50px;
 }
-input {
-  width: 300px;
-  background-color: #f5f5f5;
-  border: none;
-  font-size: 20px;
-}
+
 label {
   width: 300px;
   background-color: #f5f5f5;
   border: none;
   font-size: 20px;
 }
-.form-container {
+.formContainer {
   display: flex;
   justify-content: center;
   align-content: center;
 }
-.input-div {
+.inputDiv {
   border-bottom: 10px;
   padding: 10px;
 }
@@ -74,62 +69,57 @@ button {
   background-color: #5fc4e3;
   border: none;
 }
-.nav-container {
+.navContainer {
   display: flex;
   justify-content: space-between;
   box-shadow: 5px 3px lightgrey;
   margin-bottom: 10px;
 }
-.nav-logo {
+.navLogo {
   color: #5fc4e3;
   margin-left: 5px;
 }
-.links-div {
+.linksDiv {
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
 }
-.nav-box {
+.navBox {
   border: 2px solid #5fc4e3;
   padding: 40px 60px;
   border-radius: 7px;
   display: flex;
   flex-direction: column;
 }
-.link-fix {
-  text-decoration: none;
-  font-size: 20px;
-}
-.box-text {
+.boxText {
   font-family: Open Sans;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 19px;
 }
-.nav-links-div {
+.navLinksDiv {
   display: flex;
   justify-content: space-between;
   width: 200px;
   margin-right: 10px;
 }
-.nav-text {
+.navText {
   font-size: 20px;
   text-decoration: none;
   color: #5fc4e3;
   margin-top: 20px;
 }
-.move-signup {
+.moveSignup {
   display: flex;
   flex-direction: column;
 }
-small {
-  font-size: 20px;
-  border: 2px solid blue;
-}
-.smaller-button {
+/* .smaller-button {
   width: 100px;
   font-size: 14px;
   text-decoration: none;
   margin-left: 5px;
+} */
+.signupInput {
+  border-bottom: none;
 }

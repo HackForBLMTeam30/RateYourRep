@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import styles from '../login.module.css';
 
 /**
  * COMPONENT
@@ -11,27 +12,23 @@ export const UserHome = (props) => {
 
   return (
     <div>
-      <div className="links-div">
-        <div className="nav-box">
+      <div className={styles.linksDiv}>
+        <div className={styles.navBox}>
           <h4>Your Ratings</h4>
-          <p className="nav-text">Welcome, {email}</p>
-          <button className="primary-btn">
-            <Link className="link-fix" to="/ratings">
-              View Your Ratings
-            </Link>
-          </button>
+          <p className={styles.navText}>Welcome, {email}</p>
+          <Link to="/ratings">
+            <button className="primary-btn">View Your Ratings</button>
+          </Link>
         </div>
 
-        <div className="nav-box">
+        <div className={styles.navBox}>
           <h4>Legislators</h4>
-          <p className="nav-text">
+          <p className={styles.navText}>
             Track your legislators and see their ratings
           </p>
-          <button className="primary-btn">
-            <Link className="link-fix" to="/legislators">
-              View Your Legislators
-            </Link>
-          </button>
+          <Link to="/legislators">
+            <button className="primary-btn">View Your Legislators</button>
+          </Link>
         </div>
       </div>
     </div>

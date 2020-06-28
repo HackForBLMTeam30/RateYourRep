@@ -2,16 +2,25 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { auth } from '../store';
-import '../login.css';
+import styles from '../login.module.css';
 import house from '../assets/house.svg';
 import trending from '../assets/trending.svg';
 import { Link } from 'react-router-dom';
-
+import {
+  TextField,
+  FormLabel,
+  RadioGroup,
+  Radio,
+  FormControlLabel,
+} from '@material-ui/core';
 /**
  * COMPONENT
  */
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
+  const handleChange = (e) => {
+    console.log('placeholder');
+  };
 
   return (
     <div id="login-flex">
@@ -20,77 +29,104 @@ const AuthForm = (props) => {
           <h3>{displayName.toUpperCase()}</h3>
           {name === 'signup' && (
             <>
-              {/* <label htmlFor="first_name">
-                <small>First Name</small>
-              </label> */}
-              <input placeholder="First Name" name="first_name" type="text" />
+              <TextField
+                className={styles.signupInput}
+                placeholder="First Name"
+                variant="filled"
+              />
 
-              {/* <label htmlFor="last_name">
-                <small>Last Name</small>
-              </label> */}
-              <input placeholder=" Last Name" name="last_name" type="text" />
+              <TextField
+                placeholder="Last Name"
+                variant="filled"
+                type="text"
+                className={styles.signupInput}
+              />
 
-              {/* <label htmlFor="street1">
-                <small>Street Address 1</small>
-              </label> */}
-              <input
+              <TextField
                 placeholder="Street Address 1"
                 name="street1"
-                type="text"
+                variant="filled"
+                className={styles.signupInput}
               />
 
-              {/* <label htmlFor="street2">
-                <small>Street Address 2</small>
-              </label> */}
-
-              <input
+              <TextField
                 placeholder="Street Address 2"
                 name="street2"
-                type="text"
+                variant="filled"
+                className={styles.signupInput}
               />
-
-              {/* <label htmlFor="city">
-                <small>City</small>
-              </label> */}
-              <input placeholder="City" name="city" type="text" />
-
-              {/* <label className="label" htmlFor="state">
-                <small>State</small>
-              </label> */}
-              <input
+              <TextField
+                placeholder="City"
+                name="city"
+                variant="filled"
+                className={styles.signupInput}
+              />
+              <TextField
                 placeholder="State"
-                className="input"
+                className={styles.signupInput}
                 name="state"
-                type="text"
+                variant="filled"
               />
-
-              {/* <label htmlFor="zip">
-                <small>Zip Code</small>
-              </label> */}
-              <input placeholder="Zip Code" name="zip" type="text" />
-              <div className="move-checkbox">
-                <label htmlFor="identity">
-                  <small>Do you identify as Black or African American?</small>
-                </label>
-                <input name="identity" type="checkbox" />
-              </div>
+              <TextField
+                className={styles.signupInput}
+                placeholder="Zip Code"
+                name="zip"
+                variant="filled"
+              />
+              <FormLabel name="identity" component="legend">
+                Do you identify as part of any of the following groups?
+              </FormLabel>
+              <RadioGroup name="identity" value={false} onChange={handleChange}>
+                <FormControlLabel
+                  value="false"
+                  control={<Radio />}
+                  label="Black or African American"
+                />
+                <FormControlLabel
+                  value="male"
+                  control={<Radio />}
+                  label="Hispanic or Latin American"
+                />
+                <FormControlLabel
+                  value="other"
+                  control={<Radio />}
+                  label="Other"
+                />
+                <FormControlLabel
+                  value="disabled"
+                  disabled
+                  control={<Radio />}
+                  label="(Disabled option)"
+                />
+              </RadioGroup>
             </>
           )}
-          <div className="input-div">
-            <input name="email" type="text" placeholder="email" />
+          <div className={styles.inputDiv}>
+            <TextField
+              className={styles.signupInput}
+              variant="filled"
+              size="small"
+              name="email"
+              type="text"
+              placeholder="email"
+            />
           </div>
 
-          <div className="input-div">
-            <input
+          <div className={styles.inputDiv}>
+            <TextField
+              className={styles.signupInput}
               name="password"
-              type="password"
+              size="small"
+              variant="filled"
               placeholder="password"
               autoComplete="on"
             />
           </div>
 
           <div>
-            <button type="submit" className="primary-btn">{displayName}</button>
+            <button type="submit" className="primary-btn">
+              {displayName}
+            </button>
           </div>
           {error && error.response && <div> {error.response.data} </div>}
         </form>
