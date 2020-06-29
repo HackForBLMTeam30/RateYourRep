@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { auth } from '../store';
-import styles from '../login.module.css';
+import styling from '../login.module.css';
 import house from '../assets/house.svg';
 import trending from '../assets/trending.svg';
 import { Link } from 'react-router-dom';
@@ -13,9 +13,11 @@ import {
   Radio,
   FormControlLabel,
 } from '@material-ui/core';
+import { styled } from '@material-ui/core/styles';
 /**
  * COMPONENT
  */
+
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
   const handleChange = (e) => {
@@ -23,57 +25,107 @@ const AuthForm = (props) => {
   };
 
   return (
-    <div id="login-flex">
-      <div className="form-div">
+    <div id={styling.loginFlex}>
+      <div className={styling.formDiv}>
         <form onSubmit={handleSubmit} name={name}>
           <h3>{displayName.toUpperCase()}</h3>
-          {name === 'signup' && (
-            <>
+          <div className={styling.loginWrapper}>
+            <div className={styling.inputDiv}>
               <TextField
-                className={styles.signupInput}
-                placeholder="First Name"
+                InputProps={{ disableUnderline: true }}
                 variant="filled"
-              />
-
-              <TextField
-                placeholder="Last Name"
-                variant="filled"
+                name="email"
                 type="text"
-                className={styles.signupInput}
+                placeholder="email"
+                fullWidth
               />
+            </div>
 
+            <div className={styling.inputDiv}>
               <TextField
-                placeholder="Street Address 1"
-                name="street1"
+                InputProps={{ disableUnderline: true }}
                 variant="filled"
-                className={styles.signupInput}
+                name="password"
+                type="text"
+                placeholder="password"
+                autoComplete="on"
+                fullWidth
               />
+            </div>
+          </div>
+          {name === 'signup' && (
+            <div className={styling.loginWrapper}>
+              <div className={styling.inputDiv}>
+                <TextField
+                  fullWidth
+                  id="filled-basic"
+                  InputProps={{ disableUnderline: true }}
+                  placeholder="First Name"
+                  variant="filled"
+                />
+              </div>
 
-              <TextField
-                placeholder="Street Address 2"
-                name="street2"
-                variant="filled"
-                className={styles.signupInput}
-              />
-              <TextField
-                placeholder="City"
-                name="city"
-                variant="filled"
-                className={styles.signupInput}
-              />
-              <TextField
-                placeholder="State"
-                className={styles.signupInput}
-                name="state"
-                variant="filled"
-              />
-              <TextField
-                className={styles.signupInput}
-                placeholder="Zip Code"
-                name="zip"
-                variant="filled"
-              />
-              <FormLabel name="identity" component="legend">
+              <div className={styling.inputDiv}>
+                <TextField
+                  fullWidth
+                  placeholder="Last Name"
+                  variant="filled"
+                  type="text"
+                  InputProps={{ disableUnderline: true }}
+                />
+              </div>
+
+              <div className={styling.inputDiv}>
+                <TextField
+                  fullWidth
+                  placeholder="Street Address 1"
+                  name="street1"
+                  variant="filled"
+                  InputProps={{ disableUnderline: true }}
+                />
+              </div>
+
+              <div className={styling.inputDiv}>
+                <TextField
+                  fullWidth
+                  placeholder="Street Address 2"
+                  name="street2"
+                  variant="filled"
+                  InputProps={{ disableUnderline: true }}
+                />
+              </div>
+              <div className={styling.inputDiv}>
+                <TextField
+                  fullWidth
+                  placeholder="City"
+                  name="city"
+                  variant="filled"
+                  InputProps={{ disableUnderline: true }}
+                />
+              </div>
+              <div className={styling.inputDiv}>
+                <TextField
+                  fullWidth
+                  placeholder="State"
+                  InputProps={{ disableUnderline: true }}
+                  name="state"
+                  variant="filled"
+                />
+              </div>
+              <div className={styling.inputDiv}>
+                <TextField
+                  fullWidth
+                  InputProps={{ disableUnderline: true }}
+                  placeholder="Zip Code"
+                  name="zip"
+                  variant="filled"
+                />
+              </div>
+              <FormLabel
+                className={styling.formLabel}
+                name="identity"
+                component="legend"
+              >
                 Do you identify as part of any of the following groups?
               </FormLabel>
               <RadioGroup name="identity" value={false} onChange={handleChange}>
@@ -83,6 +135,7 @@ const AuthForm = (props) => {
                   label="Black or African American"
                 />
                 <FormControlLabel
+                  className={styling.testClass}
                   value="male"
                   control={<Radio />}
                   label="Hispanic or Latin American"
@@ -99,29 +152,8 @@ const AuthForm = (props) => {
                   label="(Disabled option)"
                 />
               </RadioGroup>
-            </>
+            </div>
           )}
-          <div className={styles.inputDiv}>
-            <TextField
-              className={styles.signupInput}
-              variant="filled"
-              size="small"
-              name="email"
-              type="text"
-              placeholder="email"
-            />
-          </div>
-
-          <div className={styles.inputDiv}>
-            <TextField
-              className={styles.signupInput}
-              name="password"
-              size="small"
-              variant="filled"
-              placeholder="password"
-              autoComplete="on"
-            />
-          </div>
 
           <div>
             <button type="submit" className="primary-btn">
@@ -131,10 +163,10 @@ const AuthForm = (props) => {
           {error && error.response && <div> {error.response.data} </div>}
         </form>
       </div>
-      <div className="logo-div">
-        <div className="logo-container">
+      <div className={styling.logoDiv}>
+        <div className={styling.logoContainer}>
           <img src={trending} alt="trending"></img>
-          <h3 className="logo-name">Rate Your Rep</h3>
+          <h3 className={styling.logoName}>Rate Your Rep</h3>
           <img src={house} alt="house"></img>
         </div>
       </div>
@@ -205,6 +237,7 @@ const mapDispatch = (dispatch) => {
 export const Login = connect(mapLogin, mapDispatch)(AuthForm);
 export const Signup = connect(mapSignup, mapDispatch)(AuthForm);
 
+export default { Login, Signup };
 /**
  * PROP TYPES
  */

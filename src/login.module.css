@@ -123,3 +123,13 @@ button {
 .signupInput {
   border-bottom: none;
 }
+.testClass {
+  width: 10px;
+}
+
+.formLabel {
+  background-color: rgb(195, 195, 195);
+  margin: 8px;
+  padding: 4px;
+  border-radius: 2px;
+}
