@@ -114,22 +114,27 @@ button {
   display: flex;
   flex-direction: column;
 }
-/* .smaller-button {
-  width: 100px;
-  font-size: 14px;
-  text-decoration: none;
-  margin-left: 5px;
-} */
 .signupInput {
   border-bottom: none;
 }
-.testClass {
-  width: 10px;
+.radioButtons {
+  width: 100%;
 }
 
 .formLabel {
-  background-color: rgb(195, 195, 195);
-  margin: 8px;
-  padding: 4px;
+  margin-bottom: 8px;
+  margin-left: -8px;
   border-radius: 2px;
+}
+.loginWrapper {
+  display: flex;
+  flex-direction: column;
+}
+.displayNameMargin {
+  margin-left: 8px;
+}
+.radioDiv {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
 }

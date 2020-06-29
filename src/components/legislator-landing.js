@@ -1,16 +1,16 @@
-import React from "react";
-import { compose } from "redux";
-import { connect } from "react-redux";
-import { withStyles } from "@material-ui/core/styles";
-import { Avatar, Button, Tooltip } from "@material-ui/core";
-import { Rating } from "@material-ui/lab";
-import { LegislatorProfile, LegislatorRatings } from "./index";
-import { getActiveLegislator } from "../store/active-legislator";
+import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/core/styles';
+import { Avatar, Button, Tooltip } from '@material-ui/core';
+import { Rating } from '@material-ui/lab';
+import { LegislatorProfile, LegislatorRatings } from './index';
+import { getActiveLegislator } from '../store/active-legislator';
 
 const styles = (theme) => ({
   root: {
-    display: "flex",
-    "& > *": {
+    display: 'flex',
+    '& > *': {
       margin: theme.spacing(1),
     },
   },
@@ -26,10 +26,10 @@ const styles = (theme) => ({
 
 const StyledRating = withStyles({
   iconFilled: {
-    color: "black",
+    color: 'black',
   },
   iconHover: {
-    color: "#ff3d47",
+    color: '#ff3d47',
   },
 })(Rating);
 
@@ -52,7 +52,7 @@ class LegislatorLanding extends React.Component {
   render() {
     const { activeLegislator, classes } = this.props;
     const { displayProfile } = this.state;
-    const {overallRating, overallBlkRating} = this.props.location.state
+    const { overallRating, overallBlkRating } = this.props.location.state;
     return (
       <div>
         <div id="summary">
@@ -72,7 +72,7 @@ class LegislatorLanding extends React.Component {
                 color="primary"
                 onClick={() => this.handleProfile()}
               >
-                {displayProfile ? "VIEW RATINGS" : "VIEW PROFILE"}
+                {displayProfile ? 'VIEW RATINGS' : 'VIEW PROFILE'}
               </Button>
             </div>
           </div>
@@ -81,11 +81,7 @@ class LegislatorLanding extends React.Component {
             {/* TODO: Pending breakdown scores from backend calculations. */}
             <Tooltip title="All" aria-label="identity" arrow>
               <div>
-                <Rating
-                  defaultValue={overallRating}
-                  precision={0.1}
-                  readOnly
-                />
+                <Rating defaultValue={overallRating} precision={0.1} readOnly />
               </div>
             </Tooltip>
             <Tooltip

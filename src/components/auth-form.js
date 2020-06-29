@@ -20,19 +20,21 @@ import { styled } from '@material-ui/core/styles';
 
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
-  const handleChange = (e) => {
-    console.log('placeholder');
-  };
 
   return (
     <div id={styling.loginFlex}>
       <div className={styling.formDiv}>
         <form onSubmit={handleSubmit} name={name}>
-          <h3>{displayName.toUpperCase()}</h3>
+          <h3 className={styling.displayNameMargin}>
+            {displayName.toUpperCase()}
+          </h3>
           <div className={styling.loginWrapper}>
             <div className={styling.inputDiv}>
               <TextField
-                InputProps={{ disableUnderline: true }}
+                InputProps={{
+                  disableUnderline: true,
+                  style: { fontFamily: 'Poppins' },
+                }}
                 variant="filled"
                 name="email"
                 type="text"
@@ -43,7 +45,10 @@ const AuthForm = (props) => {
 
             <div className={styling.inputDiv}>
               <TextField
-                InputProps={{ disableUnderline: true }}
+                InputProps={{
+                  disableUnderline: true,
+                  style: { fontFamily: 'Poppins' },
+                }}
                 variant="filled"
                 name="password"
                 type="text"
@@ -59,9 +64,13 @@ const AuthForm = (props) => {
                 <TextField
                   fullWidth
                   id="filled-basic"
-                  InputProps={{ disableUnderline: true }}
+                  InputProps={{
+                    disableUnderline: true,
+                    style: { fontFamily: 'Poppins' },
+                  }}
                   placeholder="First Name"
                   variant="filled"
+                  name="first_name"
                 />
               </div>
 
@@ -71,7 +80,11 @@ const AuthForm = (props) => {
                   placeholder="Last Name"
                   variant="filled"
                   type="text"
-                  InputProps={{ disableUnderline: true }}
+                  InputProps={{
+                    disableUnderline: true,
+                    style: { fontFamily: 'Poppins' },
+                  }}
+                  name="last_name"
                 />
               </div>
 
@@ -81,7 +94,10 @@ const AuthForm = (props) => {
                   placeholder="Street Address 1"
                   name="street1"
                   variant="filled"
-                  InputProps={{ disableUnderline: true }}
+                  InputProps={{
+                    disableUnderline: true,
+                    style: { fontFamily: 'Poppins' },
+                  }}
                 />
               </div>
 
@@ -91,7 +107,10 @@ const AuthForm = (props) => {
                   placeholder="Street Address 2"
                   name="street2"
                   variant="filled"
-                  InputProps={{ disableUnderline: true }}
+                  InputProps={{
+                    disableUnderline: true,
+                    style: { fontFamily: 'Poppins' },
+                  }}
                 />
               </div>
               <div className={styling.inputDiv}>
@@ -100,14 +119,20 @@ const AuthForm = (props) => {
                   placeholder="City"
                   name="city"
                   variant="filled"
-                  InputProps={{ disableUnderline: true }}
+                  InputProps={{
+                    disableUnderline: true,
+                    style: { fontFamily: 'Poppins' },
+                  }}
                 />
               </div>
               <div className={styling.inputDiv}>
                 <TextField
                   fullWidth
                   placeholder="State"
-                  InputProps={{ disableUnderline: true }}
+                  InputProps={{
+                    disableUnderline: true,
+                    style: { fontFamily: 'Poppins' },
+                  }}
                   name="state"
                   variant="filled"
                 />
@@ -115,43 +140,38 @@ const AuthForm = (props) => {
               <div className={styling.inputDiv}>
                 <TextField
                   fullWidth
-                  InputProps={{ disableUnderline: true }}
+                  InputProps={{
+                    disableUnderline: true,
+                    style: { fontFamily: 'Poppins' },
+                  }}
                   placeholder="Zip Code"
                   name="zip"
                   variant="filled"
                 />
               </div>
-              <FormLabel
-                className={styling.formLabel}
-                name="identity"
-                component="legend"
-              >
-                Do you identify as part of any of the following groups?
-              </FormLabel>
-              <RadioGroup name="identity" value={false} onChange={handleChange}>
-                <FormControlLabel
-                  value="false"
-                  control={<Radio />}
-                  label="Black or African American"
-                />
-                <FormControlLabel
-                  className={styling.testClass}
-                  value="male"
-                  control={<Radio />}
-                  label="Hispanic or Latin American"
-                />
-                <FormControlLabel
-                  value="other"
-                  control={<Radio />}
-                  label="Other"
-                />
-                <FormControlLabel
-                  value="disabled"
-                  disabled
-                  control={<Radio />}
-                  label="(Disabled option)"
-                />
-              </RadioGroup>
+              <div className={styling.radioDiv}>
+                <FormLabel
+                  className={styling.formLabel}
+                  name="identity"
+                  component="legend"
+                >
+                  Do you identify as Black or African American?
+                </FormLabel>
+                <RadioGroup name="identity">
+                  <FormControlLabel
+                    className={styling.radioButtons}
+                    value="true"
+                    control={<Radio />}
+                    label="Yes"
+                  />
+                  <FormControlLabel
+                    className={styling.radioButtons}
+                    value="false"
+                    control={<Radio />}
+                    label="No"
+                  />
+                </RadioGroup>
+              </div>
             </div>
           )}
 
@@ -213,7 +233,7 @@ const mapDispatch = (dispatch) => {
         city = evt.target.city.value;
         state = evt.target.state.value;
         zip = evt.target.zip.value;
-        identity = evt.target.identity.checked;
+        identity = evt.target.identity.value;
       }
       dispatch(
         auth(
